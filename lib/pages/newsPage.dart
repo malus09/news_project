@@ -75,22 +75,23 @@ class _NewsPageState extends State<NewsPage> {
             Row(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: TextField(
-                    decoration: InputDecoration(labelText: 'Search'),
-                    onChanged: onChangeSearch,
-                  ),
+                  child: buildSearchBar(),
                 ),
-                IconButton(
-                  icon: Icon(Icons.favorite),
-                  onPressed: () {
-                    // Navegue para a página de favoritos
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FavoritesPage()),
-                    );
-                  },
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  child: IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+                      // Navegue para a página de favoritos
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FavoritesPage()),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -106,6 +107,46 @@ class _NewsPageState extends State<NewsPage> {
                       )),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildSearchBar() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.80,
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.2),
+        borderRadius: BorderRadius.all(Radius.circular(24)),
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 45,
+            child: TextField(
+              style: TextStyle(fontSize: 14.0, color: Colors.grey),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
+                prefixIcon: Icon(Icons.search),
+                hintText: 'Faça sua busca',
+                hintStyle: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+                focusColor: Colors.white,
+                isDense: true,
+                prefixIconColor: Colors.grey,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+              ),
+              onChanged: onChangeSearch,
+            ),
+          ),
+        ],
       ),
     );
   }
